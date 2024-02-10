@@ -1,0 +1,6 @@
+{
+    "parent": "sssmod:item/noname_bow",
+    "textures": {
+        "layer0": "sssmod:item/bow_pulling_1"
+    }
+}

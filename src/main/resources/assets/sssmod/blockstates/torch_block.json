@@ -1,0 +1,7 @@
+{
+    "variants": {
+      "": {
+        "model": "sssmod:block/torch_block"
+      }
+    }
+  }

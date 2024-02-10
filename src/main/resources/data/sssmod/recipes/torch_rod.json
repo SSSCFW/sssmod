@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    " # ",
+    " T "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "T": {
+      "item": "minecraft:torch"
+    }
+  },
+  "result": {
+    "item": "sssmod:torch_rod"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "dirt_food",
+  "ingredients": [
+    {
+      "item": "sssmod:torch_block"
+    }
+  ],
+  "result": {
+    "item": "minecraft:torch",
+    "count": 9
+  }
+}

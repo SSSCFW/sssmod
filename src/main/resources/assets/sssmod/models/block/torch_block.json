@@ -1,0 +1,8 @@
+{
+    "parent": "minecraft:block/cube_bottom_top",
+    "textures": {
+      "bottom": "sssmod:block/torch_block_bottom",
+      "side": "sssmod:block/torch_block",
+      "top": "sssmod:block/torch_block_top"
+    }
+  }

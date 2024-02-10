@@ -1,0 +1,13 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "group": "dirt_food",
+    "ingredients": [
+      {
+        "item": "minecraft:dirt"
+      }
+    ],
+    "result": {
+      "item": "sssmod:dirt_food",
+      "count": 1
+    }
+  }
