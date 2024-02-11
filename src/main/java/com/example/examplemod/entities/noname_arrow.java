@@ -9,6 +9,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
@@ -34,6 +35,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import com.example.examplemod.Config;
 import com.example.examplemod.ExampleMod;
+import com.example.examplemod.items.sssitems;
+import com.example.examplemod.network.PhantasmParticle;
+import com.example.examplemod.network.packet;
 import com.google.common.collect.Lists;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -67,25 +71,27 @@ public class noname_arrow extends AbstractArrow {
 
 
    private static final double ARROW_BASE_DAMAGE = 2.0D;
-    private static final EntityDataAccessor<Byte> ID_FLAGS = SynchedEntityData.defineId(AbstractArrow.class, EntityDataSerializers.BYTE);
-    private static final EntityDataAccessor<Byte> PIERCE_LEVEL = SynchedEntityData.defineId(AbstractArrow.class, EntityDataSerializers.BYTE);
-    private static final int FLAG_CRIT = 1;
-    private static final int FLAG_NOPHYSICS = 2;
-    private static final int FLAG_CROSSBOW = 4;
+   private static final EntityDataAccessor<Byte> ID_FLAGS = SynchedEntityData.defineId(AbstractArrow.class, EntityDataSerializers.BYTE);
+   private static final EntityDataAccessor<Byte> PIERCE_LEVEL = SynchedEntityData.defineId(AbstractArrow.class, EntityDataSerializers.BYTE);
+   private static final int FLAG_CRIT = 1;
+   private static final int FLAG_NOPHYSICS = 2;
+   private static final int FLAG_CROSSBOW = 4;
 
-    private int life;
-    private double baseDamage = 2.0D;
-    private int knockback;
-    private SoundEvent soundEvent = this.getDefaultHitGroundSoundEvent();
-    private BlockState lastState;
-    @Nullable
-    private IntOpenHashSet piercingIgnoreEntityIds;
-    @Nullable
-    private List<Entity> piercedAndKilledEntities;
-    private ItemStack pickupItemStack;
+   private int life;
+   private double baseDamage = 2.0D;
+   private int knockback;
+   private SoundEvent soundEvent = this.getDefaultHitGroundSoundEvent();
+   private BlockState lastState;
+   @Nullable
+   private IntOpenHashSet piercingIgnoreEntityIds;
+   @Nullable
+   private List<Entity> piercedAndKilledEntities;
+   private ItemStack pickupItemStack;
+
+   private final IntOpenHashSet ignoredEntities = new IntOpenHashSet();
  
-    private final IntOpenHashSet ignoredEntities = new IntOpenHashSet();
- 
+   public boolean phantasm = false;
+
    @Override
    public void tick() {
       super.tick();
@@ -244,6 +250,11 @@ public class noname_arrow extends AbstractArrow {
       this.life = 0;
    }
 
+   @Override
+   public void setCritArrow(boolean flag) {
+      super.setCritArrow(flag);
+      phantasm = flag;
+   }
    
    @Override
    protected void onHitEntity(EntityHitResult p_36757_) {
@@ -252,22 +263,6 @@ public class noname_arrow extends AbstractArrow {
       float f = (float)this.getDeltaMovement().length();
       int i = Mth.ceil(Mth.clamp((double)f * this.baseDamage, 0.0D, (double)Integer.MAX_VALUE));
       setPierceLevel((byte) 0);
-      if (this.getPierceLevel() > 0) {
-         if (this.piercingIgnoreEntityIds == null) {
-            this.piercingIgnoreEntityIds = new IntOpenHashSet(5);
-         }
-
-         if (this.piercedAndKilledEntities == null) {
-            this.piercedAndKilledEntities = Lists.newArrayListWithCapacity(5);
-         }
-
-         if (this.piercingIgnoreEntityIds.size() >= this.getPierceLevel() + 1) {
-            this.discard();
-            return;
-         }
-
-         this.piercingIgnoreEntityIds.add(entity.getId());
-      }
 
       if (this.isCritArrow()) {
          long j = (long)this.random.nextInt(i / 2 + 2);
@@ -356,8 +351,11 @@ public class noname_arrow extends AbstractArrow {
          }
       }
       if (entity1 != entity) {
-         BrokenPhantasm(20.0f);
-         this.discard();
+         if (phantasm) {
+            BrokenPhantasm(20.0f);
+            this.discard();
+         }
+         
          //this.level().explode(this, this.getX(), this.getY(), this.getZ(), 10.0f, true, Level.ExplosionInteraction.MOB);
       }
       
@@ -365,8 +363,11 @@ public class noname_arrow extends AbstractArrow {
 
    @Override
    protected void onHitBlock(BlockHitResult p_36755_) {
-      BrokenPhantasm(20.0f);
-      this.discard();
+      if (phantasm) {
+         BrokenPhantasm(20.0f);
+         this.discard();
+      }
+      
       return;
    }
 
@@ -383,35 +384,36 @@ public class noname_arrow extends AbstractArrow {
       int j1 = Mth.floor(z + (double)f2 + 1.0D);
       List<Entity> list = this.level().getEntities(this, new AABB((double)k1, (double)i2, (double)j2, (double)l1, (double)i1, (double)j1));
       Entity owner = this.getOwner();
-      DamageSource damagesource = this.damageSources().magic();
+      DamageSource damagesource = this.damageSources().playerAttack(owner instanceof Player ? (Player)owner : null);
       boolean pvp = Config.playerdamage;
+      float f = (float)this.getDeltaMovement().length();
+      int damage = Mth.ceil(Mth.clamp((double)f * this.baseDamage, 0.0D, (double)Integer.MAX_VALUE));
+      if (this.isCritArrow()) {
+         long j = (long)this.random.nextInt(damage / 2 + 2);
+         damage = (int)Math.min(j + (long)damage, 2147483647L);
+      }
+      float damage2 = (float)damage;
 
       this.playSound(SoundEvents.GENERIC_EXPLODE, 8.0F, 0.9F);
       for(Entity entity : list) {
          if (owner != entity && entity.getType() != EntityType.ITEM && entity.getType() != EntityType.EXPERIENCE_ORB && entity.getType() != EntityType.ARROW) {
             if (!pvp || pvp && !(entity instanceof Player)) {
                entity.invulnerableTime = 0;
-               entity.hurt(damagesource, (float) (getBaseDamage()*2));
+               entity.hurt(damagesource, (damage2*2));
             }
          }
       }
-      spawnPhantasmParticles((double) radius, x, y, z);
+      Vec3 vec3 = new Vec3(x, y, z);
+      packet.sendToAllClients(new PhantasmParticle(vec3));
+      //spawnPhantasmParticles((double) radius, x, y, z);
       
    }
 
-   private void spawnPhantasmParticles(double radius, double x, double y, double z) {
-      for(int i = 0; i < 360; i++) {
-          for(int i2 = -180; i2 < 180; i2++) {
-             if (i % 40 == 0) {
-                this.level().addAlwaysVisibleParticle(ParticleTypes.FIREWORK,
-                x, y + 1.0D, z,
-                      Math.cos(i) * (1-Math.abs(i2)/180d), i2/180d, Math.sin(i) * (1-Math.abs(i2)/180d));
-                  
-             }
-          }
-      }
-      System.out.println("particle end");
-  }
+   @Override
+   protected ItemStack getPickupItem() {
+      return ItemStack.EMPTY;
+   }
+
    
 
 

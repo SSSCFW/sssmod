@@ -2,6 +2,7 @@ package com.example.examplemod.blocks;
 
 import com.example.examplemod.ExampleMod;
 
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FurnaceBlock;
@@ -19,11 +20,24 @@ public class sssblocks {
         .strength(1f, 120f)
         .lightLevel(value -> 15)
         ));
-    @SuppressWarnings("null")
-    public static final RegistryObject<Block> IRON_FURNACE = BLOCKS.register("iron_furnace", () -> new IronFurnace(
-        BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
-        .strength(1f, 120f)
-        ));
+        @SuppressWarnings("null")
+        public static final RegistryObject<Block> IRON_FURNACE = BLOCKS.register("iron_furnace", () -> new IronFurnace(
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+            .strength(1f, 120f)
+            ));
+
+        @SuppressWarnings("null")
+        public static final RegistryObject<Block> MONSTER_BLOCK = BLOCKS.register("monster_block", () -> new MonsterBlock(
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+            .strength(1f, 120f)
+            ));
+
+        @SuppressWarnings("null")
+        public static final RegistryObject<Block> SPIKE_BLOCK = BLOCKS.register("spike_block", () -> new SpikeBlock(
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+            .strength(1f, 120f)
+            .noCollission()
+            ));
         
 
     public static void register(IEventBus eventBus) {

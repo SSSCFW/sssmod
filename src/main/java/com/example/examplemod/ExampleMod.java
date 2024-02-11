@@ -7,14 +7,18 @@ import com.example.examplemod.entities.entityInit;
 import com.example.examplemod.entities.noname_arrow;
 import com.example.examplemod.entities.render.noname_arrow_renderer;
 import com.example.examplemod.items.sssitems;
+import com.example.examplemod.network.packet;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -22,7 +26,9 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -74,6 +80,7 @@ public class ExampleMod
                 output.accept(sssitems.IRON_FURNACE.get());
                 output.accept(sssitems.NONAME_BOW.get());
                 output.accept(sssitems.NONAME_ARROW.get());
+                output.accept(sssitems.SPIKE_BLOCK.get());
             }).build());
 
     public static void addCustomItemProperties() {
@@ -139,6 +146,9 @@ public class ExampleMod
         LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
 
         Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
+        event.enqueueWork(() -> {
+            packet.register();
+        });
     }
 
     // Add the example block item to the building blocks tab

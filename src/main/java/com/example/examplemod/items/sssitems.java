@@ -35,8 +35,9 @@ public class sssitems {
     public static final RegistryObject<Item> TORCH_ROD = ITEMS.register("torch_rod", () -> new torch_rod_event(new Item.Properties()));
     public static final RegistryObject<Item> TORCH_BLOCK = ITEMS.register("torch_block", () -> new BlockItem(sssblocks.TORCH_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> IRON_FURNACE = ITEMS.register("iron_furnace", () -> new BlockItem(sssblocks.IRON_FURNACE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SPIKE_BLOCK = ITEMS.register("spike_block", () -> new BlockItem(sssblocks.SPIKE_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> NONAME_ARROW = ITEMS.register("noname_arrow",
-            () -> new noname_arrow_item(new Item.Properties()));
+            () -> new noname_arrow_item(new Item.Properties().fireResistant()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
