@@ -2,12 +2,14 @@ package com.example.examplemod.network;
 
 import com.example.examplemod.ExampleMod;
 
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.ChannelBuilder;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.SimpleChannel;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.LevelChunk;
 
 
@@ -38,8 +40,13 @@ public class packet {
     public static void sendToLevelClients(Object msg, LevelChunk levelChunk) {
         INSTANCE.send(msg, PacketDistributor.TRACKING_CHUNK.with(levelChunk));
     }
+    
 
     public static void sendToAllClients(Object msg) {
         INSTANCE.send(msg, PacketDistributor.ALL.noArg());
+    }
+
+    public static void sendToAllClientsInDimention(Object msg, ResourceKey<Level> dim) {
+        INSTANCE.send(msg, PacketDistributor.DIMENSION.with(dim));
     }
 }

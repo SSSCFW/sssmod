@@ -3,39 +3,32 @@ package com.example.examplemod;
 import com.example.examplemod.blockentities.sssBentities;
 import com.example.examplemod.blocks.sssblocks;
 import com.example.examplemod.enchants.experience;
+import com.example.examplemod.entities.abyss;
 import com.example.examplemod.entities.entityInit;
-import com.example.examplemod.entities.noname_arrow;
 import com.example.examplemod.entities.render.noname_arrow_renderer;
+import com.example.examplemod.entities.render.torch_arrow_renderer;
 import com.example.examplemod.items.sssitems;
 import com.example.examplemod.network.packet;
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.ZombieRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -80,7 +73,13 @@ public class ExampleMod
                 output.accept(sssitems.IRON_FURNACE.get());
                 output.accept(sssitems.NONAME_BOW.get());
                 output.accept(sssitems.NONAME_ARROW.get());
+                output.accept(sssitems.TORCH_ARROW.get());
                 output.accept(sssitems.SPIKE_BLOCK.get());
+                output.accept(sssitems.IRON_SPIKE_BLOCK.get());
+                output.accept(sssitems.REVERSE_STAR.get());
+                output.accept(sssitems.ZOMBIE_STAR.get());
+                output.accept(sssitems.NETHER_PORTAL.get());
+                //output.accept(sssitems.ABYSS.get());
             }).build());
 
     public static void addCustomItemProperties() {
@@ -126,10 +125,11 @@ public class ExampleMod
         entityInit.ENTITY_TYPES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> MinecraftForge.EVENT_BUS.register(this));
+        
 
         // Register the item to a creative tab
-        modEventBus.addListener(this::addCreative);
+        //modEventBus.addListener(this::addCreative);
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
@@ -152,12 +152,12 @@ public class ExampleMod
     }
 
     // Add the example block item to the building blocks tab
-    private void addCreative(BuildCreativeModeTabContentsEvent event)
+   /* private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
             event.accept(EXAMPLE_BLOCK_ITEM);
-    }
-
+    }*/
+/*
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
@@ -165,7 +165,7 @@ public class ExampleMod
         // Do something when the server starts
         LOGGER.info("HELLO from server starting");
     }
-
+*/
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
@@ -178,6 +178,13 @@ public class ExampleMod
             //LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
             addCustomItemProperties();
             EntityRenderers.register(entityInit.NONAME_ARROW.get(), noname_arrow_renderer::new);
+            EntityRenderers.register(entityInit.TORCH_ARROW.get(), torch_arrow_renderer::new);
+            EntityRenderers.register(entityInit.ABYSS.get(), ZombieRenderer::new);
+        }
+
+        @SubscribeEvent
+        public static void registerAttributes(EntityAttributeCreationEvent event) {
+            event.put(entityInit.ABYSS.get(), abyss.createAttributes().build());
         }
     }
 }

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#P#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "minecraft:poppy"
+    }
+  },
+  "result": {
+    "item": "sssmod:iron_spike_block"
+  }
+}

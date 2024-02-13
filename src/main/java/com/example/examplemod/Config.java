@@ -8,7 +8,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -40,6 +39,9 @@ public class Config
     private static final ForgeConfigSpec.BooleanValue PlayerSpecialDamage = BUILDER
             .comment("範囲攻撃等でプレイヤーにダメージを与える。")
             .define("playerdamage", false);
+    private static final ForgeConfigSpec.BooleanValue VillagerSpecialDamage = BUILDER
+            .comment("範囲攻撃等で村人にダメージを与える。")
+            .define("villagerdamage", false);
 
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
@@ -48,6 +50,7 @@ public class Config
     public static String magicNumberIntroduction;
     public static Set<Item> items;
     public static boolean playerdamage;
+    public static boolean villagerdamage;
 
     private static boolean validateItemName(final Object obj)
     {
@@ -61,6 +64,7 @@ public class Config
         magicNumber = MAGIC_NUMBER.get();
         magicNumberIntroduction = MAGIC_NUMBER_INTRODUCTION.get();
         playerdamage = PlayerSpecialDamage.get();
+        villagerdamage = VillagerSpecialDamage.get();
 
         // convert the list of strings into a set of items
         items = ITEM_STRINGS.get().stream()

@@ -3,13 +3,9 @@ package com.example.examplemod.entities;
 import java.util.Arrays;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
@@ -17,12 +13,9 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -34,15 +27,10 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import com.example.examplemod.Config;
-import com.example.examplemod.ExampleMod;
-import com.example.examplemod.items.sssitems;
 import com.example.examplemod.network.PhantasmParticle;
 import com.example.examplemod.network.packet;
-import com.google.common.collect.Lists;
 import java.util.List;
 import javax.annotation.Nullable;
-
-import org.jetbrains.annotations.NotNull;
 
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -52,7 +40,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.enchantment.Enchantments;
 
 public class noname_arrow extends AbstractArrow {
 
@@ -385,7 +372,9 @@ public class noname_arrow extends AbstractArrow {
       List<Entity> list = this.level().getEntities(this, new AABB((double)k1, (double)i2, (double)j2, (double)l1, (double)i1, (double)j1));
       Entity owner = this.getOwner();
       DamageSource damagesource = this.damageSources().playerAttack(owner instanceof Player ? (Player)owner : null);
+      DamageSource damagesource_magic = this.damageSources().magic();
       boolean pvp = Config.playerdamage;
+      boolean villager = Config.villagerdamage;
       float f = (float)this.getDeltaMovement().length();
       int damage = Mth.ceil(Mth.clamp((double)f * this.baseDamage, 0.0D, (double)Integer.MAX_VALUE));
       if (this.isCritArrow()) {
@@ -397,14 +386,19 @@ public class noname_arrow extends AbstractArrow {
       this.playSound(SoundEvents.GENERIC_EXPLODE, 8.0F, 0.9F);
       for(Entity entity : list) {
          if (owner != entity && entity.getType() != EntityType.ITEM && entity.getType() != EntityType.EXPERIENCE_ORB && entity.getType() != EntityType.ARROW) {
-            if (!pvp || pvp && !(entity instanceof Player)) {
-               entity.invulnerableTime = 0;
-               entity.hurt(damagesource, (damage2*2));
+            if (!villager && entity.getType() == EntityType.VILLAGER) continue;
+            if (!pvp && (entity instanceof Player)) continue;
+            entity.invulnerableTime = 0;
+            if (entity.getType() == EntityType.IRON_GOLEM) {
+               entity.hurt(damagesource_magic, (damage2*2));
             }
+            else {
+               entity.hurt(damagesource, (damage2*2));
+            }            
          }
       }
       Vec3 vec3 = new Vec3(x, y, z);
-      packet.sendToAllClients(new PhantasmParticle(vec3));
+      packet.sendToAllClientsInDimention(new PhantasmParticle(vec3), this.level().dimension());
       //spawnPhantasmParticles((double) radius, x, y, z);
       
    }

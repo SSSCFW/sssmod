@@ -3,8 +3,13 @@
     "item.sssmod.torch_rod": "Torch rod",
     "item.sssmod.noname_bow": "Noname bow",
     "item.sssmod.noname_arrow": "Caladbolg",
+    "item.sssmod.torch_arrow": "Torch arrow",
+    "item.sssmod.reverse_star": "Reverse Star",
+    "item.sssmod.zombie_star": "Zombie Star",
+    "entity.sssmod.abyss": "Mr.Abyss",
     "block.sssmod.torch_block": "Torch block",
     "block.sssmod.iron_furnace": "Iron Furnace",
     "block.sssmod.spike_block": "Spike block",
+    "block.sssmod.iron_spike_block": "Iron Spike block",
     "enchantment.sssmod.experience": "Experience"
   }

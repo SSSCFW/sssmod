@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
-        "sssmod:noname_arrow"
+        "sssmod:noname_arrow",
+        "sssmod:torch_arrow"
     ]
 }

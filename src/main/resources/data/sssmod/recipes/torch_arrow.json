@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    " A ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:torch"
+    },
+    "A": {
+      "item": "minecraft:arrow"
+    }
+  },
+  "result": {
+    "item": "sssmod:torch_arrow"
+  }
+}

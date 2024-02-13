@@ -2,6 +2,7 @@
     "values": [
         "sssmod:torch_block",
         "sssmod:iron_furnace",
-        "sssmod:spike_block"
+        "sssmod:spike_block",
+        "sssmod:iron_spike_block"
     ]
 }

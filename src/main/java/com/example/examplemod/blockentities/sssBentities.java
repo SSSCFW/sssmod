@@ -1,7 +1,6 @@
 package com.example.examplemod.blockentities;
 
 import com.example.examplemod.ExampleMod;
-import com.example.examplemod.blocks.IronFurnace;
 import com.example.examplemod.blocks.sssblocks;
 
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -19,6 +18,8 @@ public class sssBentities {
         () -> BlockEntityType.Builder.of(MonsterBlockEntity::new, sssblocks.MONSTER_BLOCK.get()).build(null));
     public static final RegistryObject<BlockEntityType<SpikeBlockEntity>> SPIKEBLOCK_ENTITY = TILE_ENTITY_TYPES.register("spike_block_entity",
         () -> BlockEntityType.Builder.of(SpikeBlockEntity::new, sssblocks.SPIKE_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<IronSpikeBlockEntity>> IRONSPIKEBLOCK_ENTITY = TILE_ENTITY_TYPES.register("iron_spike_block_entity",
+        () -> BlockEntityType.Builder.of(IronSpikeBlockEntity::new, sssblocks.IRON_SPIKE_BLOCK.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         TILE_ENTITY_TYPES.register(eventBus);
