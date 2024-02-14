@@ -182,6 +182,11 @@ public class ExampleMod
             EntityRenderers.register(entityInit.ABYSS.get(), ZombieRenderer::new);
         }
 
+    }
+
+    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class ModEvents
+    {
         @SubscribeEvent
         public static void registerAttributes(EntityAttributeCreationEvent event) {
             event.put(entityInit.ABYSS.get(), abyss.createAttributes().build());

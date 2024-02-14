@@ -1,5 +1,6 @@
 package com.example.examplemod.items.spcial;
-/*
+import net.minecraft.nbt.CompoundTag;
+/* 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.UUID;
@@ -29,6 +30,11 @@ public class reverse_star extends Item {
             } catch (IllegalAccessException | IllegalArgumentException | NoSuchMethodException | InvocationTargetException e) {
                 e.printStackTrace();
             }*/
+            CompoundTag tag = entity.serializeNBT();
+            
+            tag.putInt("ConversionTime", 1);
+            //entity.addAdditionalSaveData(tag);
+            entity.deserializeNBT(tag);
         }
         return super.interactLivingEntity(itemStack, player, entity, hand);
     }
