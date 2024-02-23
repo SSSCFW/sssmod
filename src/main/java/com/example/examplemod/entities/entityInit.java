@@ -13,12 +13,17 @@ public class entityInit {
     public static DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, ExampleMod.MODID);
 
     public static final RegistryObject<EntityType<noname_arrow>> NONAME_ARROW = ENTITY_TYPES.register("noname_arrow",
-            () -> EntityType.Builder.of((EntityType.EntityFactory<noname_arrow>) noname_arrow::new, MobCategory.MISC).sized(0.5F, 0.5F).build("noname_arrow"));
+            () -> EntityType.Builder.of((EntityType.EntityFactory<noname_arrow>) noname_arrow::new, MobCategory.MISC).build("noname_arrow"));
     public static final RegistryObject<EntityType<torch_arrow>> TORCH_ARROW = ENTITY_TYPES.register("torch_arrow",
             () -> EntityType.Builder.of((EntityType.EntityFactory<torch_arrow>) torch_arrow::new, MobCategory.MISC).sized(0.5F, 0.5F).build("torch_arrow"));
+    public static final RegistryObject<EntityType<explosion_arrow>> EXPLOSION_ARROW = ENTITY_TYPES.register("explosion_arrow",
+            () -> EntityType.Builder.of((EntityType.EntityFactory<explosion_arrow>) explosion_arrow::new, MobCategory.MISC).sized(0.5F, 0.5F).build("explosion_arrow"));
 
     public static final RegistryObject<EntityType<abyss>> ABYSS = ENTITY_TYPES.register("abyss",
             () -> EntityType.Builder.of((EntityType.EntityFactory<abyss>) abyss::new, MobCategory.MONSTER).build("abyss"));
+
+    public static final RegistryObject<EntityType<flight_boat>> FLIGHT_BOAT = ENTITY_TYPES.register("flight_boat",
+            () -> EntityType.Builder.of((EntityType.EntityFactory<flight_boat>) flight_boat::new, MobCategory.MISC).sized(1.375f, 0.5625f).build("flight_boat"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

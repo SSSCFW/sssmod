@@ -2,10 +2,15 @@ package com.example.examplemod.items;
 
 import com.example.examplemod.ExampleMod;
 import com.example.examplemod.blocks.sssblocks;
+import com.example.examplemod.entities.entityInit;
+import com.example.examplemod.entities.flight_boat;
 import com.example.examplemod.event.noname_bow;
 import com.example.examplemod.event.torch_rod_event;
+import com.example.examplemod.items.spcial.flight_boat_item;
+import com.example.examplemod.items.spcial.invincible_star;
 import com.example.examplemod.items.spcial.noname_arrow_item;
 import com.example.examplemod.items.spcial.reverse_star;
+import com.example.examplemod.items.spcial.ssselytra;
 import com.example.examplemod.items.spcial.torch_arrow_item;
 import com.example.examplemod.items.spcial.zombie_star;
 
@@ -13,6 +18,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.ElytraItem;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -47,10 +54,18 @@ public class sssitems {
     public static final RegistryObject<Item> REVERSE_STAR = ITEMS.register("reverse_star", () -> new reverse_star(new Item.Properties()));
     public static final RegistryObject<Item> ZOMBIE_STAR = ITEMS.register("zombie_star", () -> new zombie_star(new Item.Properties()));
     public static final RegistryObject<Item> NETHER_PORTAL = ITEMS.register("nether_portal", () -> new BlockItem(Blocks.NETHER_PORTAL, new Item.Properties()));
-    
+    public static final RegistryObject<Item> FLIGHT_BOAT = ITEMS.register("flight_boat",
+            () -> new flight_boat_item(flight_boat.Type.TORCH, new Item.Properties().fireResistant()));
     //public static final RegistryObject<Item> ABYSS = ITEMS.register("abyss_spawn", () -> new ForgeSpawnEggItem((Supplier<? extends EntityType<? extends Mob>>) entityInit.ABYSS.get(), 0, 0, new Item.Properties()));
-
-
+    public static final RegistryObject<Item> DIAMOND_STICK = ITEMS.register("diamond_stick", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ORE_TELEPORT = ITEMS.register("ore_teleport", () -> new BlockItem(sssblocks.ORE_TELEPORT.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INVINCIBLE_STAR = ITEMS.register("invincible_star", () -> new invincible_star(new Item.Properties()));
+    public static final RegistryObject<Item> ABYSS_PRIZE = ITEMS.register("abyss_prize", () -> new Item(new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> ABYSS_BLOCK = ITEMS.register("abyss_block", () -> new BlockItem(sssblocks.ABYSS_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SSS_ELYTRA = ITEMS.register("sss_elytra", () -> new ssselytra(
+        new Item.Properties().fireResistant().durability(1200)));
+    
+    
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

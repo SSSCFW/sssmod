@@ -3,6 +3,8 @@
         "sssmod:torch_block",
         "sssmod:iron_furnace",
         "sssmod:spike_block",
-        "sssmod:iron_spike_block"
+        "sssmod:iron_spike_block",
+        "sssmod:ore_teleport",
+        "sssmod:abyss_block"
     ]
 }

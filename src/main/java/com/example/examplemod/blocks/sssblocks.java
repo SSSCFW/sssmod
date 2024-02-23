@@ -38,11 +38,19 @@ public class sssblocks {
         .noCollission()
     ));
 
-        @SuppressWarnings("null")
-        public static final RegistryObject<Block> IRON_SPIKE_BLOCK = BLOCKS.register("iron_spike_block", () -> new IronSpikeBlock(
+    @SuppressWarnings("null")
+    public static final RegistryObject<Block> IRON_SPIKE_BLOCK = BLOCKS.register("iron_spike_block", () -> new IronSpikeBlock(
             BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
             .strength(1f, 120f)
             .noCollission()
+    ));
+
+    public static final RegistryObject<Block> ORE_TELEPORT = BLOCKS.register("ore_teleport",
+    () -> new ModPortalBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).noLootTable().strength(1f, 120f).noOcclusion().noCollission()));
+
+    public static final RegistryObject<Block> ABYSS_BLOCK = BLOCKS.register("abyss_block", () -> new Block(
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+            .strength(1f, 120f)
     ));
     
 

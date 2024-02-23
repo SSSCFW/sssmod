@@ -1,0 +1,24 @@
+{
+    "name": "sssmod:abyss_temp/start_pool",
+  
+
+    "fallback": "minecraft:empty",
+  
+    "elements": [
+      {
+  
+        "weight": 1,
+        "element": {
+  
+
+          "location": "sssmod:abyss_temp",
+  
+          "processors": "minecraft:empty",
+  
+          "projection": "rigid",
+  
+          "element_type": "minecraft:single_pool_element"
+        }
+      }
+    ]
+  }

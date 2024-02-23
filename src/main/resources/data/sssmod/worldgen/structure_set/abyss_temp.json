@@ -1,0 +1,21 @@
+{
+    "structures": [
+      {
+        "structure": "sssmod:abyss_temp",
+        "weight": 1
+      }
+    ],
+    "placement": {
+      
+      "salt": 1642136474,
+  
+      
+      "spacing": 25,
+  
+      
+      "separation": 12,
+  
+      
+      "type": "minecraft:random_spread"
+    }
+  }

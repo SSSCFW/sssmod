@@ -27,6 +27,11 @@ public class packet {
                 .decoder(PhantasmParticle::new)
                 .consumerMainThread(PhantasmParticle::handle)
                 .add();
+        INSTANCE.messageBuilder(ExplosionParticle.class, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(ExplosionParticle::encode)
+                .decoder(ExplosionParticle::new)
+                .consumerMainThread(ExplosionParticle::handle)
+                .add();
     }
 
     public static void sendToServer(Object msg) {

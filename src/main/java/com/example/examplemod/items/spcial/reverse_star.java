@@ -2,13 +2,16 @@ package com.example.examplemod.items.spcial;
 import net.minecraft.nbt.CompoundTag;
 /* 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.lang.reflect.Method;*/
 import java.util.UUID;
-*/
+
+import com.example.examplemod.mixin.ZombieVillagerAccessor;
+
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.ZombieVillager;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -30,11 +33,8 @@ public class reverse_star extends Item {
             } catch (IllegalAccessException | IllegalArgumentException | NoSuchMethodException | InvocationTargetException e) {
                 e.printStackTrace();
             }*/
-            CompoundTag tag = entity.serializeNBT();
-            
-            tag.putInt("ConversionTime", 1);
-            //entity.addAdditionalSaveData(tag);
-            entity.deserializeNBT(tag);
+            ((ZombieVillagerAccessor) entity).startConvertingAccessor(player.getUUID(), 0);
+            itemStack.shrink(1);
         }
         return super.interactLivingEntity(itemStack, player, entity, hand);
     }

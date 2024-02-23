@@ -39,6 +39,9 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.animal.Cat;
+import net.minecraft.world.entity.animal.Ocelot;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
 
 public class noname_arrow extends AbstractArrow {
@@ -339,7 +342,7 @@ public class noname_arrow extends AbstractArrow {
       }
       if (entity1 != entity) {
          if (phantasm) {
-            BrokenPhantasm(20.0f);
+            BrokenPhantasm(20.0f, f);
             this.discard();
          }
          
@@ -351,14 +354,14 @@ public class noname_arrow extends AbstractArrow {
    @Override
    protected void onHitBlock(BlockHitResult p_36755_) {
       if (phantasm) {
-         BrokenPhantasm(20.0f);
+         BrokenPhantasm(20.0f, 0);
          this.discard();
       }
       
       return;
    }
 
-   private void BrokenPhantasm(float radius) {
+   private void BrokenPhantasm(float radius, float f) {
       float f2 = radius;
       double x = this.getX();
       double y = this.getY();
@@ -375,7 +378,10 @@ public class noname_arrow extends AbstractArrow {
       DamageSource damagesource_magic = this.damageSources().magic();
       boolean pvp = Config.playerdamage;
       boolean villager = Config.villagerdamage;
-      float f = (float)this.getDeltaMovement().length();
+      if (f == 0) {
+         f = (float)this.getDeltaMovement().length();
+      }
+      
       int damage = Mth.ceil(Mth.clamp((double)f * this.baseDamage, 0.0D, (double)Integer.MAX_VALUE));
       if (this.isCritArrow()) {
          long j = (long)this.random.nextInt(damage / 2 + 2);
@@ -385,7 +391,7 @@ public class noname_arrow extends AbstractArrow {
 
       this.playSound(SoundEvents.GENERIC_EXPLODE, 8.0F, 0.9F);
       for(Entity entity : list) {
-         if (owner != entity && entity.getType() != EntityType.ITEM && entity.getType() != EntityType.EXPERIENCE_ORB && entity.getType() != EntityType.ARROW) {
+         if (owner != entity && entity.getType() != EntityType.ITEM && entity.getType() != EntityType.EXPERIENCE_ORB && entity.getType() != EntityType.ARROW && entity.getType() != entityInit.FLIGHT_BOAT.get() && entity.getType() != EntityType.WOLF && entity.getType() != EntityType.CAT && entity.getType() != EntityType.OCELOT ) {
             if (!villager && entity.getType() == EntityType.VILLAGER) continue;
             if (!pvp && (entity instanceof Player)) continue;
             entity.invulnerableTime = 0;
