@@ -32,10 +32,10 @@ public class packet {
                 .decoder(ExplosionParticle::new)
                 .consumerMainThread(ExplosionParticle::handle)
                 .add();
-        INSTANCE.messageBuilder(SetRapidfireNBT.class, NetworkDirection.PLAY_TO_SERVER)
-                .encoder(SetRapidfireNBT::encode)
-                .decoder(SetRapidfireNBT::new)
-                .consumerMainThread(SetRapidfireNBT::handle)
+        INSTANCE.messageBuilder(RapidfireToggleReq.class, NetworkDirection.PLAY_TO_SERVER)
+                .encoder(RapidfireToggleReq::encode)
+                .decoder(RapidfireToggleReq::new)
+                .consumerMainThread(RapidfireToggleReq::handle)
                 .add();
     }
 
