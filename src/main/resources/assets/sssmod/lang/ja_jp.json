@@ -4,6 +4,7 @@
     "item.sssmod.noname_bow": "無銘の弓",
     "item.sssmod.noname_arrow": "カラドボルグ",
     "item.sssmod.torch_arrow": "松明矢",
+    "item.sssmod.homing_arrow": "追尾矢",
     "item.sssmod.reverse_star": "リバーススター",
     "item.sssmod.zombie_star": "ゾンビスター",
     "item.sssmod.flight_boat": "飛行舟",
@@ -12,6 +13,7 @@
     "item.sssmod.abyss_prize": "§5深淵の証",
     "item.sssmod.sss_elytra": "スーパーエリトラ",
     "entity.sssmod.abyss": "深淵様",
+    "entity.sssmod.rapid_skeleton": "ミニガンナー",
     "entity.sssmod.explosion_arrow": "爆発矢",
     "entity.sssmod.noname_arrow": "カラドボルグ",
     "block.sssmod.ore_teleport": "鉱石ディメンションテレポーター",
@@ -20,5 +22,9 @@
     "block.sssmod.iron_furnace": "鉄かまど",
     "block.sssmod.spike_block": "スパイクブロック",
     "block.sssmod.iron_spike_block": "アイアンスパイクブロック",
-    "enchantment.sssmod.experience": "経験"
+    "enchantment.sssmod.experience": "経験",
+    "enchantment.sssmod.rapidfire": "連射",
+    "enchantment.sssmod.homing": "追尾",
+    "enchantment.sssmod.superattack": "スーパーアタック",
+    "enchantment.sssmod.cooltime": "クールタイム"
   }

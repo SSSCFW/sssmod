@@ -2,12 +2,14 @@ package com.example.examplemod;
 
 import com.example.examplemod.blockentities.sssBentities;
 import com.example.examplemod.blocks.sssblocks;
-import com.example.examplemod.enchants.experience;
+import com.example.examplemod.enchants.Enchant;
 import com.example.examplemod.entities.abyss;
 import com.example.examplemod.entities.entityInit;
+import com.example.examplemod.entities.rapid_skeleton;
 import com.example.examplemod.entities.client.ModModelLayer;
 import com.example.examplemod.entities.render.explosion_arrow_renderer;
 import com.example.examplemod.entities.render.flight_boat_renderer;
+import com.example.examplemod.entities.render.homing_arrow_renderer;
 import com.example.examplemod.entities.render.noname_arrow_renderer;
 import com.example.examplemod.entities.render.torch_arrow_renderer;
 import com.example.examplemod.items.sssitems;
@@ -21,8 +23,10 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.ChestBoatModel;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.entity.ArrowRenderer;
 import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.client.renderer.entity.ZombieRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.HolderLookup;
@@ -31,6 +35,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.BlockItem;
@@ -118,6 +123,7 @@ public class ExampleMod
                 output.accept(sssitems.INVINCIBLE_STAR.get());
                 output.accept(sssitems.ABYSS_PRIZE.get());
                 output.accept(sssitems.ABYSS_BLOCK.get());
+                output.accept(sssitems.HOMING_ARROW.get());
                 //output.accept(sssitems.ABYSS.get());
             }).build());
 
@@ -161,7 +167,7 @@ public class ExampleMod
         sssblocks.register(modEventBus);
         sssBentities.register(modEventBus);
 
-        experience.ENCHANTMENTS.register(modEventBus);
+        Enchant.ENCHANTMENTS.register(modEventBus);
         entityInit.ENTITY_TYPES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
@@ -185,6 +191,7 @@ public class ExampleMod
         System.out.println("GatherData loaded");
     }
 
+    @SuppressWarnings("deprecation")
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         // Some common setup code
@@ -199,6 +206,7 @@ public class ExampleMod
         event.enqueueWork(() -> {
             packet.register();
             SpawnPlacements.register(entityInit.ABYSS.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, abyss::canSpawn);
+            SpawnPlacements.register(entityInit.RAPID_SKELETON.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, rapid_skeleton::canSpawn);
         });
     }
 
@@ -231,8 +239,10 @@ public class ExampleMod
             addCustomItemProperties();
             EntityRenderers.register(entityInit.NONAME_ARROW.get(), noname_arrow_renderer::new);
             EntityRenderers.register(entityInit.TORCH_ARROW.get(), torch_arrow_renderer::new);
+            EntityRenderers.register(entityInit.HOMING_ARROW.get(), homing_arrow_renderer::new);
             EntityRenderers.register(entityInit.EXPLOSION_ARROW.get(), explosion_arrow_renderer::new);
             EntityRenderers.register(entityInit.ABYSS.get(), ZombieRenderer::new);
+            EntityRenderers.register(entityInit.RAPID_SKELETON.get(), SkeletonRenderer::new);
             EntityRenderers.register(entityInit.FLIGHT_BOAT.get(),  pContext -> new flight_boat_renderer(pContext, false));
         }
 
@@ -249,6 +259,7 @@ public class ExampleMod
         @SubscribeEvent
         public static void registerAttributes(EntityAttributeCreationEvent event) {
             event.put(entityInit.ABYSS.get(), abyss.createAttributes().build());
+            event.put(entityInit.RAPID_SKELETON.get(), abyss.createAttributes().build());
         }
 
         

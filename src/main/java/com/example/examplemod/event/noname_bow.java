@@ -3,10 +3,15 @@ package com.example.examplemod.event;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+
+import com.example.examplemod.enchants.Enchant;
 import com.example.examplemod.items.sssitems;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
@@ -20,6 +25,17 @@ public class noname_bow extends BowItem {
     public noname_bow(Item.Properties properties) {
         super(properties);
     }
+
+   @SuppressWarnings("deprecation")
+   public static float getPowerForTime(int p_40662_, ItemStack p_40667_) {
+      float f = (float)p_40662_ / 20.0F;
+      f = (f * f + f * 2.0F) / 3.0F;
+      if (f > 1.0F || EnchantmentHelper.getItemEnchantmentLevel(Enchant.Rapidfire.get(), p_40667_) > 0) {
+         f = 1.0F;
+      }
+
+      return f;
+   }  
 
     @SuppressWarnings("deprecation")
     @Override
@@ -36,7 +52,7 @@ public class noname_bow extends BowItem {
             if (itemstack.isEmpty()) {
                itemstack = new ItemStack(Items.ARROW);
             }
-            float powerTime = getPowerForTime(i);
+            float powerTime = getPowerForTime(i, p_40667_);
             float f = powerTime*1.25f;
             boolean noname = false;
             if (!((double)f < 0.1D)) {
@@ -108,6 +124,12 @@ public class noname_bow extends BowItem {
             }
          }
       }
+   }
+
+   @Override
+   public InteractionResultHolder<ItemStack> use(Level p_40672_, Player p_40673_, InteractionHand p_40674_) {
+      ItemStack itemstack = p_40673_.getItemInHand(p_40674_);
+      return super.use(p_40672_, p_40673_, p_40674_);
    }
 
     

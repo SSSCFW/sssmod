@@ -81,10 +81,15 @@ public class noname_arrow extends AbstractArrow {
    private final IntOpenHashSet ignoredEntities = new IntOpenHashSet();
  
    public boolean phantasm = false;
+   private int life2 = 0;
 
    @Override
    public void tick() {
       super.tick();
+      ++this.life2;
+      if (this.life2 >= 2000) {
+         this.discard();
+      }
       boolean flag = this.isNoPhysics();
       Vec3 vec3 = this.getDeltaMovement();
       if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
@@ -211,11 +216,11 @@ public class noname_arrow extends AbstractArrow {
          float f1 = 0.05F;
          if (this.isInWater()) {
             for(int j = 0; j < 4; ++j) {
-               float f2 = 0.25F;
+               //float f2 = 0.25F;
                this.level().addParticle(ParticleTypes.BUBBLE, d7 - d5 * 0.25D, d2 - d6 * 0.25D, d3 - d1 * 0.25D, d5, d6, d1);
             }
 
-            f = this.getWaterInertia();
+            //f = this.getWaterInertia();
          }
 
          this.setDeltaMovement(vec3.scale((double)f));
@@ -362,6 +367,9 @@ public class noname_arrow extends AbstractArrow {
    }
 
    private void BrokenPhantasm(float radius, float f) {
+      if (this.level().isClientSide()) {
+         return;
+      }
       float f2 = radius;
       double x = this.getX();
       double y = this.getY();

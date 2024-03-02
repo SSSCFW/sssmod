@@ -77,7 +77,7 @@ public class torch_arrow extends AbstractArrow {
       super.onHitEntity(p_36757_);
       Entity entity = p_36757_.getEntity();
       float f = (float)this.getDeltaMovement().length();
-      int i = Mth.ceil(Mth.clamp((double)f * this.baseDamage, 0.0D, (double)Integer.MAX_VALUE));
+      int i = Mth.ceil(Mth.clamp((double)f * this.baseDamage+4.0D, 0.0D, (double)Integer.MAX_VALUE));
       setPierceLevel((byte) 0);
 
       if (this.isCritArrow()) {

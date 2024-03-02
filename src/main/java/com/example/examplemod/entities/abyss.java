@@ -9,6 +9,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.DamageTypeTags;
@@ -24,6 +27,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.SpawnPlacements;
@@ -47,7 +51,8 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 
 public class abyss extends Zombie {
-
+    private static final EntityDataAccessor<Boolean> DATA_DROWNED_CONVERSION_ID = SynchedEntityData.defineId(Zombie.class, EntityDataSerializers.BOOLEAN);
+    
     public abyss(EntityType<? extends Zombie> p_34271_, Level p_34272_) {
         super(p_34271_, p_34272_);
      }
@@ -63,9 +68,26 @@ public class abyss extends Zombie {
         .add(Attributes.MOVEMENT_SPEED, (double)0.51F)
         .add(Attributes.ATTACK_DAMAGE, 20.0D)
         .add(Attributes.ARMOR, 2.0D)
-        .add(Attributes.KNOCKBACK_RESISTANCE, 0.15D)
+        .add(Attributes.KNOCKBACK_RESISTANCE, 1.5D)
         .add(Attributes.SPAWN_REINFORCEMENTS_CHANCE, 1.0F);
      }
+
+    @Override
+    protected boolean convertsInWater() {
+        return false;
+    }
+
+    @Override
+    public void tick() {
+        
+        super.tick();
+    }
+
+    @Override
+    protected void doUnderWaterConversion() {
+        this.conversionTime = 1000;
+        this.getEntityData().set(DATA_DROWNED_CONVERSION_ID, true);
+    }
 
     private ItemStack equip_enchant(ItemStack item) {
         CompoundTag tag = new CompoundTag();
@@ -261,6 +283,7 @@ public class abyss extends Zombie {
         this.setDropChance(EquipmentSlot.FEET, 0.05F);
         this.setDropChance(EquipmentSlot.MAINHAND, 0.05F);
         this.addEffect(new MobEffectInstance(MobEffects.JUMP, 2147483647, 5));
+        this.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 2147483647, 5));
         this.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 2147483647, 1));
         this.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 2147483647, 1));
         

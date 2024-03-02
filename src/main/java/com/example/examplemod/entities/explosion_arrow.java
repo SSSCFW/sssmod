@@ -77,10 +77,15 @@ public class explosion_arrow extends AbstractArrow {
    private ItemStack pickupItemStack;
 
    private final IntOpenHashSet ignoredEntities = new IntOpenHashSet();
+   private int life2 = 0;
 
    @Override
    public void tick() {
       super.tick();
+      ++this.life2;
+      if (this.life2 >= 1200) {
+         this.discard();
+      }
       boolean flag = this.isNoPhysics();
       Vec3 vec3 = this.getDeltaMovement();
       if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
@@ -353,6 +358,9 @@ public class explosion_arrow extends AbstractArrow {
    }
 
    private void HitExplosion() {
+      if (this.level().isClientSide()) {
+         return;
+      }
       float f2 = 3;
       double x = this.getX();
       double y = this.getY();

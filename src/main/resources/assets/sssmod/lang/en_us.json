@@ -4,12 +4,14 @@
     "item.sssmod.noname_bow": "Noname bow",
     "item.sssmod.noname_arrow": "Caladbolg",
     "item.sssmod.torch_arrow": "Torch arrow",
+    "item.sssmod.homing_arrow": "Homing arrow",
     "item.sssmod.reverse_star": "Reverse Star",
     "item.sssmod.zombie_star": "Zombie Star",
     "item.sssmod.flight_boat": "Flight Boat",
     "item.sssmod.diamond_stick": "Diamond stick",
     "item.sssmod.invincible_star": "Invincible Star",
     "entity.sssmod.abyss": "Mr.Abyss",
+    "entity.sssmod.rapid_skeleton": "Rapid Skeleton",
     "item.sssmod.sss_elytra": "Super Elytra",
     "item.sssmod.abyss_prize": "§5Abyssal Proof",
     "entity.sssmod.explosion_arrow": "Explosion Arrow",
@@ -20,5 +22,9 @@
     "block.sssmod.iron_furnace": "Iron Furnace",
     "block.sssmod.spike_block": "Spike block",
     "block.sssmod.iron_spike_block": "Iron Spike block",
-    "enchantment.sssmod.experience": "Experience"
+    "enchantment.sssmod.experience": "Experience",
+    "enchantment.sssmod.rapidfire": "Rapid Fire",
+    "enchantment.sssmod.homing": "Homing",
+    "enchantment.sssmod.superattack": "Super Attack",
+    "enchantment.sssmod.cooltime": "Cooltime"
   }

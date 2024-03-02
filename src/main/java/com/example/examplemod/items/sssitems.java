@@ -7,6 +7,7 @@ import com.example.examplemod.entities.flight_boat;
 import com.example.examplemod.event.noname_bow;
 import com.example.examplemod.event.torch_rod_event;
 import com.example.examplemod.items.spcial.flight_boat_item;
+import com.example.examplemod.items.spcial.homing_arrow_item;
 import com.example.examplemod.items.spcial.invincible_star;
 import com.example.examplemod.items.spcial.noname_arrow_item;
 import com.example.examplemod.items.spcial.reverse_star;
@@ -51,6 +52,8 @@ public class sssitems {
             () -> new noname_arrow_item(new Item.Properties().fireResistant()));
     public static final RegistryObject<Item> TORCH_ARROW = ITEMS.register("torch_arrow",
             () -> new torch_arrow_item(new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> HOMING_ARROW = ITEMS.register("homing_arrow",
+            () -> new homing_arrow_item(new Item.Properties().fireResistant()));
     public static final RegistryObject<Item> REVERSE_STAR = ITEMS.register("reverse_star", () -> new reverse_star(new Item.Properties()));
     public static final RegistryObject<Item> ZOMBIE_STAR = ITEMS.register("zombie_star", () -> new zombie_star(new Item.Properties()));
     public static final RegistryObject<Item> NETHER_PORTAL = ITEMS.register("nether_portal", () -> new BlockItem(Blocks.NETHER_PORTAL, new Item.Properties()));

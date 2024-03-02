@@ -2,6 +2,7 @@
     "replace": false,
     "values": [
         "sssmod:noname_arrow",
-        "sssmod:torch_arrow"
+        "sssmod:torch_arrow",
+        "sssmod:homing_arrow"
     ]
 }

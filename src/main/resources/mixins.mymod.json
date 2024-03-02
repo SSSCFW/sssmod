@@ -6,5 +6,13 @@
     "injectors": {
         "defaultRequire": 1
     },
-    "mixins": ["ZombieVillagerAccessor", "EnderDragonInject", "AnvilMenuInject", "AnvilScreenInject"]
+    "mixins": [
+        "ZombieVillagerAccessor", 
+        "EnderDragonInject", 
+        "AnvilMenuInject", 
+        "AnvilScreenInject", 
+        "LivingEntityInject", 
+        "AbstractArrowInject",
+        "PlayerInject"
+    ]
   }

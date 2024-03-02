@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#P#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "P": {
+      "item": "minecraft:arrow"
+    }
+  },
+  "result": {
+    "item": "sssmod:homing_arrow"
+  }
+}

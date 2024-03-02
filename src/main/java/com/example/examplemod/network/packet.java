@@ -32,6 +32,11 @@ public class packet {
                 .decoder(ExplosionParticle::new)
                 .consumerMainThread(ExplosionParticle::handle)
                 .add();
+        INSTANCE.messageBuilder(SetRapidfireNBT.class, NetworkDirection.PLAY_TO_SERVER)
+                .encoder(SetRapidfireNBT::encode)
+                .decoder(SetRapidfireNBT::new)
+                .consumerMainThread(SetRapidfireNBT::handle)
+                .add();
     }
 
     public static void sendToServer(Object msg) {
