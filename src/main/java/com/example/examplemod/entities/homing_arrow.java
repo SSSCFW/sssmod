@@ -107,7 +107,7 @@ public class homing_arrow extends AbstractArrow {
 
 				// Tell mc to adjust our rotation accordingly
 				shoot(adjustedLookVec.x, adjustedLookVec.y, adjustedLookVec.z, 1.1F, 0);
-            this.setBaseDamage(6+this.getBaseDamage()*1.25);
+            this.setBaseDamage(2+this.getBaseDamage());
 			}
 		}
 		super.tick();
@@ -132,10 +132,10 @@ public class homing_arrow extends AbstractArrow {
 
 		if (!candidates.isEmpty()) {
 			candidates.sort(Comparator.comparingDouble(homing_arrow.this::distanceToSqr));
-         List<Mob> entities = candidates.stream().filter(mob -> !(mob instanceof Animal || mob instanceof Villager)).collect(Collectors.toList());
-         if (!entities.isEmpty()) { 
-			   entityData.set(DW_TARGET_ID, entities.get(0).getId());
-         }
+			List<Mob> entities = candidates.stream().filter(mob -> !(mob instanceof Animal || mob instanceof Villager || mob == getOwner())).collect(Collectors.toList());
+			if (!entities.isEmpty()) { 
+				entityData.set(DW_TARGET_ID, entities.get(0).getId());
+			}
 		}
 
 		newTargetCooldown = 5;

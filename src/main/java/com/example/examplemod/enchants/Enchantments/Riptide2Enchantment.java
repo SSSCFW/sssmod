@@ -15,8 +15,8 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-public class SuperAttackEnchantment extends Enchantment {
-    public SuperAttackEnchantment(Rarity rarity, EnchantmentCategory category, EquipmentSlot... slots) {
+public class Riptide2Enchantment extends Enchantment {
+    public Riptide2Enchantment(Rarity rarity, EnchantmentCategory category, EquipmentSlot... slots) {
 		super(rarity, category, slots);
 	}
 
@@ -44,17 +44,4 @@ public class SuperAttackEnchantment extends Enchantment {
     public boolean isDiscoverable() {
         return false;
     }
- /* 
-    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
-    public static class ExperienceingHandler {
-        @SubscribeEvent
-        public static void attack(AttackEntityEvent event){
-            int level = EnchantmentHelper.getEnchantmentLevel(Enchant.SuperAttack.get(), event.getEntity());
-            if (level > 0) {
-                event.getTarget().invulnerableTime = 0;
-            }
-            
-
-        }
-    } */
 }

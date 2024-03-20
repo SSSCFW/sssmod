@@ -3,7 +3,9 @@ package com.example.examplemod.blockentities;
 import com.example.examplemod.ExampleMod;
 import com.example.examplemod.blocks.sssblocks;
 
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -20,8 +22,15 @@ public class sssBentities {
         () -> BlockEntityType.Builder.of(SpikeBlockEntity::new, sssblocks.SPIKE_BLOCK.get()).build(null));
     public static final RegistryObject<BlockEntityType<IronSpikeBlockEntity>> IRONSPIKEBLOCK_ENTITY = TILE_ENTITY_TYPES.register("iron_spike_block_entity",
         () -> BlockEntityType.Builder.of(IronSpikeBlockEntity::new, sssblocks.IRON_SPIKE_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<SuperChestEntity>> SUPERCHEST_ENTITY = TILE_ENTITY_TYPES.register("superchest_entity",
+        () -> BlockEntityType.Builder.of(SuperChestEntity::new, sssblocks.SUPERCHEST.get()).build(null));
+    //public static final RegistryObject<BlockEntityType<AbyssChangerEntity>> ABYSSCHANGER_ENTITY = TILE_ENTITY_TYPES.register("abyss_changer_entity",
+    //    () -> BlockEntityType.Builder.of(AbyssChangerEntity::new, sssblocks.ABYSS_CHANGER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<SuperHopperEntity>> SUPERHOPPER_ENTITY = TILE_ENTITY_TYPES.register("superhopper_entity",
+        () -> BlockEntityType.Builder.of(SuperHopperEntity::new, sssblocks.SUPERHOPPER.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         TILE_ENTITY_TYPES.register(eventBus);
     }
-    }
+    
+}

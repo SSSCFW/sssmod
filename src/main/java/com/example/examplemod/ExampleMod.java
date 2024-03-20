@@ -4,7 +4,9 @@ import com.example.examplemod.blockentities.sssBentities;
 import com.example.examplemod.blocks.sssblocks;
 import com.example.examplemod.enchants.Enchant;
 import com.example.examplemod.entities.abyss;
+import com.example.examplemod.entities.diamond_knight;
 import com.example.examplemod.entities.entityInit;
+import com.example.examplemod.entities.iron_knight;
 import com.example.examplemod.entities.rapid_skeleton;
 import com.example.examplemod.entities.client.ModModelLayer;
 import com.example.examplemod.entities.render.explosion_arrow_renderer;
@@ -45,6 +47,7 @@ import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.trading.MerchantOffer;
@@ -59,6 +62,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -124,6 +128,12 @@ public class ExampleMod
                 output.accept(sssitems.ABYSS_PRIZE.get());
                 output.accept(sssitems.ABYSS_BLOCK.get());
                 output.accept(sssitems.HOMING_ARROW.get());
+                output.accept(sssitems.SUPERCHEST.get());
+                output.accept(sssitems.COST_PRIZE.get());
+                output.accept(sssitems.BLACKHOLE_PRIZE.get());
+                output.accept(sssitems.ABYSS_MATTER.get());
+                output.accept(sssitems.ABYSS_CHANGER.get());
+                output.accept(sssitems.SUPERHOPPER.get());
                 //output.accept(sssitems.ABYSS.get());
             }).build());
 
@@ -205,6 +215,8 @@ public class ExampleMod
         Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
         event.enqueueWork(() -> {
             packet.register();
+            SpawnPlacements.register(entityInit.IRON_KNIGHT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, iron_knight::canSpawn);
+            SpawnPlacements.register(entityInit.DIAMOND_KNIGHT.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, diamond_knight::canSpawn);
             SpawnPlacements.register(entityInit.ABYSS.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, abyss::canSpawn);
             SpawnPlacements.register(entityInit.RAPID_SKELETON.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, rapid_skeleton::canSpawn);
         });
@@ -229,6 +241,7 @@ public class ExampleMod
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
+        @SuppressWarnings("null")
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
@@ -242,6 +255,9 @@ public class ExampleMod
             EntityRenderers.register(entityInit.HOMING_ARROW.get(), homing_arrow_renderer::new);
             EntityRenderers.register(entityInit.EXPLOSION_ARROW.get(), explosion_arrow_renderer::new);
             EntityRenderers.register(entityInit.ABYSS.get(), ZombieRenderer::new);
+            EntityRenderers.register(entityInit.IRON_KNIGHT.get(), ZombieRenderer::new);
+            EntityRenderers.register(entityInit.BERSERK.get(), ZombieRenderer::new);
+            EntityRenderers.register(entityInit.DIAMOND_KNIGHT.get(), ZombieRenderer::new);
             EntityRenderers.register(entityInit.RAPID_SKELETON.get(), SkeletonRenderer::new);
             EntityRenderers.register(entityInit.FLIGHT_BOAT.get(),  pContext -> new flight_boat_renderer(pContext, false));
         }
@@ -253,14 +269,36 @@ public class ExampleMod
 
     }
 
+    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
+    public static class ExperienceingHandler {
+        @SubscribeEvent
+        public static void attack(AttackEntityEvent event){
+            int level = EnchantmentHelper.getEnchantmentLevel(Enchant.SuperAttack.get(), event.getEntity());
+            if (level > 0) {
+                event.getTarget().invulnerableTime = 0;
+            }
+            int level2 = EnchantmentHelper.getEnchantmentLevel(Enchant.SuperAttack2.get(), event.getEntity());
+            if (level2 > 0) {
+                event.getTarget().invulnerableTime -= level2/2;
+            }
+            
+
+        }
+    } 
+
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class ModEvents
     {
         @SubscribeEvent
         public static void registerAttributes(EntityAttributeCreationEvent event) {
             event.put(entityInit.ABYSS.get(), abyss.createAttributes().build());
+            event.put(entityInit.BERSERK.get(), abyss.createAttributes().build());
+            event.put(entityInit.IRON_KNIGHT.get(), abyss.createAttributes().build());
+            event.put(entityInit.DIAMOND_KNIGHT.get(), abyss.createAttributes().build());
             event.put(entityInit.RAPID_SKELETON.get(), abyss.createAttributes().build());
         }
+
+        
 
         
 

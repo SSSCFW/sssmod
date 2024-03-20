@@ -69,14 +69,37 @@ public class AnvilMenuInject extends ItemCombinerMenu {
             this.repairItemCountCost = 0;
             boolean flag = false;
             boolean unbreak_abyss = false;
+            boolean cost_prize = false;
+            boolean blackhole_prize = false;
             boolean force_ok = false;
 
             if (!net.minecraftforge.common.ForgeHooks.onAnvilChange(anvilmenu, itemstack, itemstack2, resultSlots, itemName, j, this.player)) return;
             if (!itemstack2.isEmpty()) {
                 flag = itemstack2.getItem() == Items.ENCHANTED_BOOK && !EnchantedBookItem.getEnchantments(itemstack2).isEmpty();
                 unbreak_abyss = itemstack2.getItem() == sssitems.ABYSS_PRIZE.get() && !itemstack1.getTag().getBoolean("abyss");
+                cost_prize = itemstack2.getItem() == sssitems.COST_PRIZE.get();
+                blackhole_prize = itemstack2.getItem() == sssitems.BLACKHOLE_PRIZE.get();
                 
-                if (unbreak_abyss) {
+                if (blackhole_prize) {
+                    k = 1;
+                    j = 1;
+                    i += k;
+                    force_ok = true;
+                    itemstack1.setRepairCost(0);
+                    CompoundTag tag = itemstack1.getOrCreateTag();
+                    tag.remove("abyss");
+                    itemstack1.setTag(tag);
+                    this.repairItemCountCost = 1;
+                }
+                else if (cost_prize) {
+                    k = 1;
+                    j = 1;
+                    i += k;
+                    force_ok = true;
+                    itemstack1.setRepairCost(0);
+                    this.repairItemCountCost = 1;
+                }
+                else if (unbreak_abyss) {
                     k = 1;
                     j = 29;
                     i += k;
@@ -87,7 +110,7 @@ public class AnvilMenuInject extends ItemCombinerMenu {
                     itemstack1.setTag(tag);
                     this.repairItemCountCost = 1;
                 }
-                if (itemstack1.isDamageableItem() && itemstack1.getItem().isValidRepairItem(itemstack, itemstack2)) {
+                else if (itemstack1.isDamageableItem() && itemstack1.getItem().isValidRepairItem(itemstack, itemstack2)) {
                     int l2 = Math.min(itemstack1.getDamageValue(), itemstack1.getMaxDamage() / 4);
                     if (l2 <= 0) {
                         this.resultSlots.setItem(0, ItemStack.EMPTY);

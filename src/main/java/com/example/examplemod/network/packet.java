@@ -32,6 +32,11 @@ public class packet {
                 .decoder(ExplosionParticle::new)
                 .consumerMainThread(ExplosionParticle::handle)
                 .add();
+        INSTANCE.messageBuilder(RangeAttackParticle.class, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(RangeAttackParticle::encode)
+                .decoder(RangeAttackParticle::new)
+                .consumerMainThread(RangeAttackParticle::handle)
+                .add();
         INSTANCE.messageBuilder(RapidfireToggleReq.class, NetworkDirection.PLAY_TO_SERVER)
                 .encoder(RapidfireToggleReq::encode)
                 .decoder(RapidfireToggleReq::new)

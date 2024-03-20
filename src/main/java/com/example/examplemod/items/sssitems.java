@@ -43,9 +43,10 @@ public class sssitems {
         .fireResistant()
         .durability(9999999)
         ));
-    public static final RegistryObject<Item> TORCH_ROD = ITEMS.register("torch_rod", () -> new torch_rod_event(Blocks.TORCH, Blocks.WALL_TORCH, new Item.Properties(), Direction.DOWN));
+    public static final RegistryObject<Item> TORCH_ROD = ITEMS.register("torch_rod", () -> new torch_rod_event(Blocks.WALL_TORCH, new Item.Properties(), Direction.DOWN));
     public static final RegistryObject<Item> TORCH_BLOCK = ITEMS.register("torch_block", () -> new BlockItem(sssblocks.TORCH_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> IRON_FURNACE = ITEMS.register("iron_furnace", () -> new BlockItem(sssblocks.IRON_FURNACE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SUPERCHEST = ITEMS.register("superchest", () -> new BlockItem(sssblocks.SUPERCHEST.get(), new Item.Properties()));
     public static final RegistryObject<Item> SPIKE_BLOCK = ITEMS.register("spike_block", () -> new BlockItem(sssblocks.SPIKE_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> IRON_SPIKE_BLOCK = ITEMS.register("iron_spike_block", () -> new BlockItem(sssblocks.IRON_SPIKE_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> NONAME_ARROW = ITEMS.register("noname_arrow",
@@ -64,7 +65,12 @@ public class sssitems {
     public static final RegistryObject<Item> ORE_TELEPORT = ITEMS.register("ore_teleport", () -> new BlockItem(sssblocks.ORE_TELEPORT.get(), new Item.Properties()));
     public static final RegistryObject<Item> INVINCIBLE_STAR = ITEMS.register("invincible_star", () -> new invincible_star(new Item.Properties()));
     public static final RegistryObject<Item> ABYSS_PRIZE = ITEMS.register("abyss_prize", () -> new Item(new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> COST_PRIZE = ITEMS.register("cost_prize", () -> new Item(new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> BLACKHOLE_PRIZE = ITEMS.register("blackhole_prize", () -> new Item(new Item.Properties().fireResistant()));
+    public static final RegistryObject<Item> ABYSS_MATTER = ITEMS.register("abyss_matter", () -> new Item(new Item.Properties().fireResistant()));
     public static final RegistryObject<Item> ABYSS_BLOCK = ITEMS.register("abyss_block", () -> new BlockItem(sssblocks.ABYSS_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ABYSS_CHANGER = ITEMS.register("abyss_changer", () -> new BlockItem(sssblocks.ABYSS_CHANGER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> SUPERHOPPER = ITEMS.register("superhopper", () -> new BlockItem(sssblocks.SUPERHOPPER.get(), new Item.Properties()));
     public static final RegistryObject<Item> SSS_ELYTRA = ITEMS.register("sss_elytra", () -> new ssselytra(
         new Item.Properties().fireResistant().durability(1200)));
     

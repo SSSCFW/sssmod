@@ -13,6 +13,11 @@
         "AnvilScreenInject", 
         "LivingEntityInject", 
         "AbstractArrowInject",
-        "PlayerInject"
+        "PlayerInject",
+        "ProtectionEnchantmentInject",
+        "ThrownTridentInject",
+        "WitherBossMixin",
+        "EnderDragonInject2",
+        "TridentItemInject"
     ]
   }

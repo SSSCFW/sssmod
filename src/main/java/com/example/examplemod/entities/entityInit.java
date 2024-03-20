@@ -27,6 +27,13 @@ public class entityInit {
 
         public static final RegistryObject<EntityType<rapid_skeleton>> RAPID_SKELETON = ENTITY_TYPES.register("rapid_skeleton",
                 () -> EntityType.Builder.of((EntityType.EntityFactory<rapid_skeleton>) rapid_skeleton::new, MobCategory.MONSTER).build("rapid_skeleton"));
+        public static final RegistryObject<EntityType<diamond_knight>> DIAMOND_KNIGHT = ENTITY_TYPES.register("diamond_knight",
+                () -> EntityType.Builder.of((EntityType.EntityFactory<diamond_knight>) diamond_knight::new, MobCategory.MONSTER).build("diamond_knight"));
+        public static final RegistryObject<EntityType<berserk>> BERSERK = ENTITY_TYPES.register("berserk",
+                () -> EntityType.Builder.of((EntityType.EntityFactory<berserk>) berserk::new, MobCategory.MONSTER).build("berserk"));
+        public static final RegistryObject<EntityType<iron_knight>> IRON_KNIGHT = ENTITY_TYPES.register("iron_knight",
+                () -> EntityType.Builder.of((EntityType.EntityFactory<iron_knight>) iron_knight::new, MobCategory.MONSTER).build("iron_knight"));
+
 
 
         public static final RegistryObject<EntityType<flight_boat>> FLIGHT_BOAT = ENTITY_TYPES.register("flight_boat",

@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "sssmod:block/superhopper"
+    },
+    "facing=east": {
+      "model": "sssmod:block/superhopper_side",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "sssmod:block/superhopper_side"
+    },
+    "facing=south": {
+      "model": "sssmod:block/superhopper_side",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "sssmod:block/superhopper_side",
+      "y": 270
+    }
+  }
+}

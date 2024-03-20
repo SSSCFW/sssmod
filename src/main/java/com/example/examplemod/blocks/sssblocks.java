@@ -4,6 +4,9 @@ import com.example.examplemod.ExampleMod;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.FurnaceBlock;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -24,6 +27,13 @@ public class sssblocks {
         BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
         .strength(1f, 120f)
     ));
+
+    @SuppressWarnings("null")
+    public static final RegistryObject<Block> SUPERCHEST = BLOCKS.register("superchest", () -> new SuperChest(
+        BlockBehaviour.Properties.ofFullCopy(Blocks.CHEST)
+        .strength(1f, 120f)
+    ));
+
 
     @SuppressWarnings("null")
     public static final RegistryObject<Block> MONSTER_BLOCK = BLOCKS.register("monster_block", () -> new MonsterBlock(
@@ -51,6 +61,16 @@ public class sssblocks {
     public static final RegistryObject<Block> ABYSS_BLOCK = BLOCKS.register("abyss_block", () -> new Block(
             BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
             .strength(1f, 120f)
+    ));
+
+    public static final RegistryObject<Block> ABYSS_CHANGER = BLOCKS.register("abyss_changer", () -> new Block(
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+            .strength(2f, 120f)
+    ));
+
+    public static final RegistryObject<Block> SUPERHOPPER = BLOCKS.register("superhopper", () -> new SuperHopper(
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+            .strength(2f, 120f)
     ));
     
 

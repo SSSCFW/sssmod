@@ -17,14 +17,15 @@ import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.gameevent.GameEvent;
 
 public class torch_rod_event extends StandingAndWallBlockItem {
-    public torch_rod_event(Block p_248873_, Block p_251044_, Item.Properties p_249308_, Direction p_250800_) {
-        super(p_248873_, p_251044_, p_249308_, p_250800_);
+    public torch_rod_event(Block p_251044_, Item.Properties p_249308_, Direction p_250800_) {
+        super(Blocks.TORCH, p_251044_, p_249308_, p_250800_);
     }
 
     @Override
