@@ -18,6 +18,7 @@
         "ThrownTridentInject",
         "WitherBossMixin",
         "EnderDragonInject2",
-        "TridentItemInject"
+        "TridentItemInject",
+        "AbstractFurnaceBlockEntityAccessor"
     ]
   }

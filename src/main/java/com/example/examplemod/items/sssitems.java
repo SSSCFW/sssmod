@@ -58,6 +58,7 @@ public class sssitems {
     public static final RegistryObject<Item> REVERSE_STAR = ITEMS.register("reverse_star", () -> new reverse_star(new Item.Properties()));
     public static final RegistryObject<Item> ZOMBIE_STAR = ITEMS.register("zombie_star", () -> new zombie_star(new Item.Properties()));
     public static final RegistryObject<Item> NETHER_PORTAL = ITEMS.register("nether_portal", () -> new BlockItem(Blocks.NETHER_PORTAL, new Item.Properties()));
+    public static final RegistryObject<Item> WATER_BLOCK = ITEMS.register("water_block", () -> new BlockItem(Blocks.WATER, new Item.Properties()));
     public static final RegistryObject<Item> FLIGHT_BOAT = ITEMS.register("flight_boat",
             () -> new flight_boat_item(flight_boat.Type.TORCH, new Item.Properties().fireResistant()));
     //public static final RegistryObject<Item> ABYSS = ITEMS.register("abyss_spawn", () -> new ForgeSpawnEggItem((Supplier<? extends EntityType<? extends Mob>>) entityInit.ABYSS.get(), 0, 0, new Item.Properties()));
@@ -73,6 +74,8 @@ public class sssitems {
     public static final RegistryObject<Item> SUPERHOPPER = ITEMS.register("superhopper", () -> new BlockItem(sssblocks.SUPERHOPPER.get(), new Item.Properties()));
     public static final RegistryObject<Item> SSS_ELYTRA = ITEMS.register("sss_elytra", () -> new ssselytra(
         new Item.Properties().fireResistant().durability(1200)));
+    public static final RegistryObject<Item> SUPERDROPPER = ITEMS.register("superdropper", () -> new BlockItem(sssblocks.SUPERDROPPER.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DESTROYER = ITEMS.register("destroyer", () -> new BlockItem(sssblocks.DESTROYER.get(), new Item.Properties()));
     
     
     public static void register(IEventBus eventBus) {

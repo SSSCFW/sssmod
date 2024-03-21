@@ -3,14 +3,18 @@ package com.example.examplemod.hook;
 import javax.annotation.Nullable;
 import java.util.Optional;
 import org.apache.commons.lang3.tuple.Pair;
+import org.jetbrains.annotations.NotNull;
 
 import com.example.examplemod.blockentities.SuperHopperEntity;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.DropperBlock;
 import net.minecraft.world.level.block.HopperBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.DispenserBlockEntity;
 import net.minecraft.world.level.block.entity.Hopper;
 import net.minecraft.world.level.block.entity.HopperBlockEntity;
 import net.minecraftforge.items.IItemHandler;
@@ -110,6 +114,35 @@ public class InventoryCodeHooks extends VanillaInventoryCodeHooks {
         }
         return stack;
     }
+
+    
+    public static boolean dropperInsertHook2(Level level, BlockPos pos, DispenserBlockEntity dropper, int slot, @NotNull ItemStack stack)
+    {
+        Direction enumfacing = level.getBlockState(pos).getValue(DropperBlock.FACING);
+        BlockPos blockpos = pos.relative(enumfacing);
+        return getItemHandler(level, (double) blockpos.getX(), (double) blockpos.getY(), (double) blockpos.getZ(), enumfacing.getOpposite())
+                .map(destinationResult -> {
+                    IItemHandler itemHandler = destinationResult.getKey();
+                    Object destination = destinationResult.getValue();
+                    ItemStack dispensedStack = stack.copy().split(64);
+                    ItemStack remainder = putStackInInventoryAllSlots(dropper, destination, itemHandler, dispensedStack);
+
+                    if (remainder.isEmpty())
+                    {
+                        remainder = stack.copy();
+                        remainder.shrink(64);
+                    }
+                    else
+                    {
+                        remainder = stack.copy();
+                    }
+
+                    dropper.setItem(slot, remainder);
+                    return false;
+                })
+                .orElse(true);
+    }
+
 
 
     @Nullable

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#A#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "A": {
+      "item": "sssmod:abyss_prize"
+    }
+  },
+  "result": {
+    "item": "sssmod:abyss_changer"
+  }
+}

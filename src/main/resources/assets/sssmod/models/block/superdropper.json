@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "sssmod:block/superdropper_front",
+    "side": "sssmod:block/superfurnace_side",
+    "top": "sssmod:block/superfurnace_top"
+  }
+}

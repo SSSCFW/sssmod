@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#A#",
+    "ABA",
+    "#A#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "A": {
+      "item": "sssmod:abyss_matter"
+    },
+    "B": {
+      "item": "minecraft:dropper"
+    }
+  },
+  "result": {
+    "item": "sssmod:destroyer"
+  }
+}

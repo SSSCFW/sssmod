@@ -61,17 +61,31 @@ public class sssblocks {
     public static final RegistryObject<Block> ABYSS_BLOCK = BLOCKS.register("abyss_block", () -> new Block(
             BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
             .strength(1f, 120f)
+            
     ));
 
-    public static final RegistryObject<Block> ABYSS_CHANGER = BLOCKS.register("abyss_changer", () -> new Block(
+    public static final RegistryObject<Block> ABYSS_CHANGER = BLOCKS.register("abyss_changer", () -> new AbyssChanger(
             BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
             .strength(2f, 120f)
+            .noCollission()
     ));
 
     public static final RegistryObject<Block> SUPERHOPPER = BLOCKS.register("superhopper", () -> new SuperHopper(
             BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
             .strength(2f, 120f)
     ));
+
+    public static final RegistryObject<Block> SUPERDROPPER = BLOCKS.register("superdropper", () -> new SuperDropper(
+            BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+            .strength(2f, 120f)
+    ));
+
+    public static final RegistryObject<Block> DESTROYER = BLOCKS.register("destroyer", () -> new Destroyer(
+        BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+        .strength(4f, 120f)
+        
+));
+
     
 
     public static void register(IEventBus eventBus) {

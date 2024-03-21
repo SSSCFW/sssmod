@@ -6,6 +6,9 @@
         "sssmod:iron_spike_block",
         "sssmod:ore_teleport",
         "sssmod:abyss_block",
-        "sssmod:abyss_changer"
+        "sssmod:abyss_changer",
+        "sssmod:superdropper",
+        "sssmod:superhopper",
+        "sssmod:destroyer"
     ]
 }

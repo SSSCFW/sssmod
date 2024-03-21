@@ -1,0 +1,26 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "sssmod:block/destroyer_vertical",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "sssmod:block/destroyer",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "sssmod:block/destroyer"
+    },
+    "facing=south": {
+      "model": "sssmod:block/destroyer",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "sssmod:block/destroyer_vertical"
+    },
+    "facing=west": {
+      "model": "sssmod:block/destroyer",
+      "y": 270
+    }
+  }
+}

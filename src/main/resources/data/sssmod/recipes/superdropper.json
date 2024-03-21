@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#P#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "sssmod:abyss_matter"
+    },
+    "P": {
+      "item": "minecraft:dropper"
+    }
+  },
+  "result": {
+    "item": "sssmod:superdropper"
+  }
+}

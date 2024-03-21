@@ -134,6 +134,9 @@ public class ExampleMod
                 output.accept(sssitems.ABYSS_MATTER.get());
                 output.accept(sssitems.ABYSS_CHANGER.get());
                 output.accept(sssitems.SUPERHOPPER.get());
+                output.accept(sssitems.WATER_BLOCK.get());
+                output.accept(sssitems.SUPERDROPPER.get());
+                output.accept(sssitems.DESTROYER.get());
                 //output.accept(sssitems.ABYSS.get());
             }).build());
 

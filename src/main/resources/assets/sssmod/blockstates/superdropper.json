@@ -1,0 +1,26 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "sssmod:block/superdropper_vertical",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "sssmod:block/superdropper",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "sssmod:block/superdropper"
+    },
+    "facing=south": {
+      "model": "sssmod:block/superdropper",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "sssmod:block/superdropper_vertical"
+    },
+    "facing=west": {
+      "model": "sssmod:block/superdropper",
+      "y": 270
+    }
+  }
+}

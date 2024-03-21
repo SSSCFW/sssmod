@@ -24,10 +24,15 @@ public class sssBentities {
         () -> BlockEntityType.Builder.of(IronSpikeBlockEntity::new, sssblocks.IRON_SPIKE_BLOCK.get()).build(null));
     public static final RegistryObject<BlockEntityType<SuperChestEntity>> SUPERCHEST_ENTITY = TILE_ENTITY_TYPES.register("superchest_entity",
         () -> BlockEntityType.Builder.of(SuperChestEntity::new, sssblocks.SUPERCHEST.get()).build(null));
-    //public static final RegistryObject<BlockEntityType<AbyssChangerEntity>> ABYSSCHANGER_ENTITY = TILE_ENTITY_TYPES.register("abyss_changer_entity",
-    //    () -> BlockEntityType.Builder.of(AbyssChangerEntity::new, sssblocks.ABYSS_CHANGER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<AbyssChangerEntity>> ABYSSCHANGER_ENTITY = TILE_ENTITY_TYPES.register("abyss_changer_entity",
+        () -> BlockEntityType.Builder.of(AbyssChangerEntity::new, sssblocks.ABYSS_CHANGER.get()).build(null));
     public static final RegistryObject<BlockEntityType<SuperHopperEntity>> SUPERHOPPER_ENTITY = TILE_ENTITY_TYPES.register("superhopper_entity",
         () -> BlockEntityType.Builder.of(SuperHopperEntity::new, sssblocks.SUPERHOPPER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<SuperDropperEntity>> SUPERDROPPER_ENTITY = TILE_ENTITY_TYPES.register("superdropper_entity",
+        () -> BlockEntityType.Builder.of(SuperDropperEntity::new, sssblocks.SUPERDROPPER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<DestroyerEntity>> DESTROYER_ENTITY = TILE_ENTITY_TYPES.register("destroyer_entity",
+        () -> BlockEntityType.Builder.of(DestroyerEntity::new, sssblocks.DESTROYER.get()).build(null));
+
 
     public static void register(IEventBus eventBus) {
         TILE_ENTITY_TYPES.register(eventBus);
