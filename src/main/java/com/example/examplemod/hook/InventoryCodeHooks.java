@@ -142,7 +142,7 @@ public class InventoryCodeHooks extends VanillaInventoryCodeHooks {
                                             destStack.setCount(count);
                                         } else {
                                             int max_stack = destStack.getMaxStackSize();
-                                            handler.extractItem(i, extractItem.getCount()-max_stack, false); //count = 1
+                                            handler.extractItem(i, max_stack-(count-max_stack), false); //count = 1
                                             destStack.setCount(max_stack);
                                         }
                                         dest.setItem(j, destStack);

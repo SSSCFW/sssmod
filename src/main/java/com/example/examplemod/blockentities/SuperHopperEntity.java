@@ -154,8 +154,7 @@ public class SuperHopperEntity extends RandomizableContainerBlockEntity implemen
                      container.setChanged();
                      return true;
                   }
-                  System.out.println(itemstack1.getCount());
-
+                  itemstack.shrink(itemstack.getCount()-itemstack1.getCount());
                   p_155566_.setItem(i, itemstack);
                }
             }
@@ -296,13 +295,9 @@ public class SuperHopperEntity extends RandomizableContainerBlockEntity implemen
             flag = true;
          } else if (canMergeItems(itemstack, p_59323_)) {
             int i = p_59323_.getMaxStackSize() - itemstack.getCount();
-            
-            System.out.println(p_59323_.getHoverName());
             int j = Math.min(p_59323_.getCount(), i);
             p_59323_.shrink(j);
             itemstack.grow(j);
-            System.out.println(p_59323_.getCount());
-            System.out.println(j);
             flag = j > 0;
          }
 
